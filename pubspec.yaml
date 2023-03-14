@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.2.19
+  flutter_rating_bar: ^4.0.1
+  animated_bottom_navigation_bar: ^1.2.0
 
 flutter_native_splash:
   color: "#FFFFFF"
