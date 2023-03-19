@@ -8,6 +8,7 @@ import 'package:happy_online_mobile/app/theme/app_colors.dart';
 import '../controllers/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -231,13 +232,25 @@ class docContainer extends StatelessWidget {
                     SizedBox(
                       width: Get.width * 0.4,
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.phone_android_rounded,
-                          color: Colors.grey,
-                          size: 30,
-                        )),
+                    GestureDetector(
+                      onTap: () {
+                        print("hello");
+                      },
+                      child: Container(
+                        height: Get.height * 0.05,
+                        width: Get.width * 0.1,
+                        decoration: BoxDecoration(
+                          color: AppColors.lightPink,
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            LineIcons.phoneVolume,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 )
               ],
