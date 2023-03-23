@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../routes/app_pages.dart';
+
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
@@ -12,6 +14,8 @@ class HomeController extends GetxController {
   RxString userName = ''.obs;
   RxString userImage = ''.obs;
   RxString userRole = ''.obs;
+  RxBool isLoading = true.obs;
+  RxList docList = [].obs;
 
   Future getSearchResults(String searchField) async {
     return await firestore
@@ -21,17 +25,20 @@ class HomeController extends GetxController {
         .get();
   }
 
-  Future getTherapistUsers() async {
-    return await firestore
-        .collection('Users')
-        .where('role', isEqualTo: 'therapist')
-        .get();
+  clickOnbookButtonForTherapist(index) {
+    print(index);
+    Get.toNamed(Routes.THERAPIST_PROFILE, arguments: {
+      'userId': index,
+    });
   }
 
-  setCredentilasFromFirebase(String name, String image, String role) {
-    userName.value = name;
-    userImage.value = image;
-    userRole.value = role;
+  Future getTherapistUsers() async {
+    final usersCollection = FirebaseFirestore.instance.collection('Users');
+
+    final QuerySnapshot users =
+        await usersCollection.where('role', isEqualTo: 'therapist').get();
+
+    docList.value = users.docs;
   }
 
   final count = 0.obs;
@@ -39,6 +46,8 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     await getTherapistUsers();
+    isLoading.value = !isLoading.value;
+    print(docList[0]['uid']);
   }
 
   @override

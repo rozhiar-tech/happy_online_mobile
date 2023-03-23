@@ -16,6 +16,7 @@ dependencies:
   line_icons: ^2.0.1
   firebase_core: ^2.7.1
   cloud_firestore: ^4.4.4
+  shared_preferences: ^2.0.20
 
 flutter_native_splash:
   color: "#FFFFFF"

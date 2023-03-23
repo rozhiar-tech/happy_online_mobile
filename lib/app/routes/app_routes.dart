@@ -4,9 +4,19 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
+  static const THERAPIST_PROFILE = _Paths.THERAPIST_PROFILE;
+  static const LOGIN = _Paths.LOGIN;
+  static const SIGN_UP = _Paths.SIGN_UP;
+  static const PAYMENT = _Paths.PAYMENT;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
+  static const THERAPIST_PROFILE = '/therapist-profile';
+  static const LOGIN = '/login';
+  static const SIGN_UP = '/sign-up';
+  static const PAYMENT = '/payment';
+  static const USER_PROFILE = '/user-profile';
 }
