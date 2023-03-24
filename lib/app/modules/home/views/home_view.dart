@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:happy_online_mobile/app/modules/login/views/login_view.dart';
 import 'package:happy_online_mobile/app/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -31,13 +33,16 @@ class HomeView extends GetView<HomeController> {
                   notchSmoothness: NotchSmoothness.softEdge,
                   leftCornerRadius: 32,
                   rightCornerRadius: 32,
-                  onTap: (index) => print('Tab pressed $index'),
+                  onTap: (index) {
+                    controller.changeIndex(index);
+                  },
                   activeColor: AppColors.darkPurple,
                   inactiveColor: Colors.grey,
                   splashColor: AppColors.darkPurple,
                   splashSpeedInMilliseconds: 300,
                   // notchAndCornersAnimation: borderRadiusAnimation,
                   iconSize: 24.0,
+
                   //other params
                 ),
                 body: Container(

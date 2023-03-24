@@ -8,6 +8,8 @@ import '../modules/payment/bindings/payment_binding.dart';
 import '../modules/payment/views/payment_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
+import '../modules/stars/bindings/stars_binding.dart';
+import '../modules/stars/views/stars_view.dart';
 import '../modules/therapist_profile/bindings/therapist_profile_binding.dart';
 import '../modules/therapist_profile/views/therapist_profile_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.USER_PROFILE,
       page: () => const UserProfileView(),
       binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.STARS,
+      page: () => const StarsView(),
+      binding: StarsBinding(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -32,6 +33,33 @@ class HomeController extends GetxController {
     });
   }
 
+  changeIndex(index) {
+    switch (index) {
+      case 0:
+        Get.toNamed(Routes.HOME);
+        break;
+      case 1:
+        Get.toNamed(Routes.LOGIN);
+        break;
+      case 2:
+        Get.toNamed(Routes.SIGN_UP);
+        break;
+      case 3:
+        Get.toNamed(Routes.HOME);
+        break;
+    }
+  }
+
+  checkUserIsLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? uid = prefs.getString('uid');
+    if (uid != null) {
+      Get.toNamed(Routes.HOME);
+    } else {
+      Get.toNamed(Routes.LOGIN);
+    }
+  }
+
   Future getTherapistUsers() async {
     final usersCollection = FirebaseFirestore.instance.collection('Users');
 
@@ -45,6 +73,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    checkUserIsLoggedIn();
     await getTherapistUsers();
     isLoading.value = !isLoading.value;
     print(docList[0]['uid']);

@@ -100,8 +100,8 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                             height: Get.height * 0.2,
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              print('پەیوەندی بکە');
+                            onPressed: () async {
+                              await controller.checkIfCurrentUdserHasStars();
                             },
                             child: Text('پەیوەندی بکە'),
                             style: ElevatedButton.styleFrom(
@@ -124,7 +124,6 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                               animationDuration: Duration(milliseconds: 1000),
                             ),
                           ),
-                          
                         ],
                       ),
                     ),
