@@ -14,6 +14,8 @@ import '../modules/therapist_profile/bindings/therapist_profile_binding.dart';
 import '../modules/therapist_profile/views/therapist_profile_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
 import '../modules/user_profile/views/user_profile_view.dart';
+import '../modules/video_room/bindings/video_room_binding.dart';
+import '../modules/video_room/views/video_room_view.dart';
 
 part 'app_routes.dart';
 
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.STARS,
       page: () => const StarsView(),
       binding: StarsBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_ROOM,
+      page: () => const VideoRoomView(),
+      binding: VideoRoomBinding(),
     ),
   ];
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:happy_online_mobile/app/routes/app_pages.dart';
+import 'package:intl/intl.dart';
 
 class TherapistProfileController extends GetxController {
   //TODO: Implement TherapistProfileController
@@ -16,6 +17,10 @@ class TherapistProfileController extends GetxController {
   RxBool isLoading = true.obs;
   RxString bio = ''.obs;
   RxString currentUser = ''.obs;
+  RxString availableTimeDate = ''.obs;
+  late DateTime minDate;
+  RxList datesAvailable = [].obs;
+  RxString selectedDate = ''.obs;
 
   RxList docList = [].obs;
 
@@ -34,9 +39,18 @@ class TherapistProfileController extends GetxController {
 
   setUserInformation() {
     userName.value = docList[0]['firstName'];
-    // userImage.value = docList[0]['image'];
     userRole.value = docList[0]['role'];
     bio.value = docList[0]['bio'];
+
+    List<dynamic> timestampList = docList[0]['available_date'];
+    List<String> formattedDates = timestampList.map((timestamp) {
+      DateTime dateTime = timestamp.toDate();
+      String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(dateTime);
+      return formattedDate;
+    }).toList();
+    datesAvailable.value = formattedDates;
+    
+    
   }
 
   Future checkIfCurrentUdserHasStars() async {
@@ -51,7 +65,20 @@ class TherapistProfileController extends GetxController {
         .get();
 
     if (users.docs.length > 0) {
-      print("user has stars");
+      Get.defaultDialog(
+        title: " ${userName.value}ئێستا پەیوەندی دەکەی بە",
+        middleText: "دڵنیای",
+        textConfirm: "باشە",
+        textCancel: "نەخێر",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.toNamed(Routes.STARS, arguments: {
+            'userId': currentUser.value,
+          });
+          // Get.toNamed(Routes.HOME);
+        },
+        onCancel: () => Get.close,
+      );
     } else {
       Get.defaultDialog(
         title: "پێویستت بە ستاری زیاترە بۆ پەیوەندی کردن",

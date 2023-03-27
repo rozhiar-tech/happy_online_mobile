@@ -39,7 +39,7 @@ class HomeController extends GetxController {
         Get.toNamed(Routes.HOME);
         break;
       case 1:
-        Get.toNamed(Routes.LOGIN);
+        Get.toNamed(Routes.VIDEO_ROOM);
         break;
       case 2:
         Get.toNamed(Routes.SIGN_UP);
