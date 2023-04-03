@@ -11,6 +11,7 @@ abstract class Routes {
   static const USER_PROFILE = _Paths.USER_PROFILE;
   static const STARS = _Paths.STARS;
   static const VIDEO_ROOM = _Paths.VIDEO_ROOM;
+  static const THERAPIST_HOME = _Paths.THERAPIST_HOME;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const USER_PROFILE = '/user-profile';
   static const STARS = '/stars';
   static const VIDEO_ROOM = '/video-room';
+  static const THERAPIST_HOME = '/therapist-home';
 }

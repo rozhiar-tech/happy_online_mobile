@@ -15,57 +15,53 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
         builder: (controller) {
           return SafeArea(
             child: Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: AppColors.darkPurple,
-                title: Text(
-                  'دەربارەی ئەم ئەندامە',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-                centerTitle: true,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Get.back();
-                  },
-                ),
-              ),
               body: Container(
                 height: Get.height,
                 width: Get.width,
                 color: Colors.white,
                 child: Column(
                   children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColors.lightPink,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Container(
                       height: Get.height * 0.23,
                       width: Get.width,
-                      color: AppColors.darkPurple,
+                      color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.person,
-                            size: 100,
-                            color: Colors.white,
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundImage: Image.asset(
+                              'assets/splash.jpg',
+                            ).image,
                           ),
                           Text(
                             controller.userName.value,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.darkPurple,
                               fontSize: 40,
                             ),
                           ),
                           Text(
                             controller.userRole.value,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.darkPurple,
                               fontSize: 20,
                             ),
                           ),
@@ -99,6 +95,7 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                           ),
                           const Text(
                             'کاتەکانی بەردەست',
+                            textAlign: TextAlign.left,
                             style: TextStyle(
                               color: AppColors.darkPurple,
                               fontSize: 20,
@@ -116,21 +113,79 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                      height: Get.height * 0.05,
-                                      width: Get.width * 0.3,
+                                      height: Get.height * 0.1,
+                                      width: Get.width * 0.15,
                                       decoration: BoxDecoration(
                                         color: AppColors.darkPurple,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          controller.datesAvailable[i]
-                                              .toString(),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            controller.datesAvailable[i]
+                                                        .toString()
+                                                        .substring(6, 7) ==
+                                                    "1"
+                                                ? "Jan"
+                                                : controller.datesAvailable[i]
+                                                            .toString()
+                                                            .substring(6, 7) ==
+                                                        "2"
+                                                    ? "Feb"
+                                                    : controller.datesAvailable[i]
+                                                                .toString()
+                                                                .substring(
+                                                                    6, 7) ==
+                                                            "3"
+                                                        ? "Mar"
+                                                        : controller.datesAvailable[i]
+                                                                    .toString()
+                                                                    .substring(
+                                                                        6, 7) ==
+                                                                "4"
+                                                            ? "Apr"
+                                                            : controller.datesAvailable[i]
+                                                                        .toString()
+                                                                        .substring(
+                                                                            6, 7) ==
+                                                                    "5"
+                                                                ? "May"
+                                                                : controller.datesAvailable[i].toString().substring(6, 7) ==
+                                                                        "6"
+                                                                    ? "Jun"
+                                                                    : controller.datesAvailable[i].toString().substring(6, 7) == "7"
+                                                                        ? "Jul"
+                                                                        : controller.datesAvailable[i].toString().substring(6, 7) == "8"
+                                                                            ? "Aug"
+                                                                            : controller.datesAvailable[i].toString().substring(6, 7) == "9"
+                                                                                ? "Sep"
+                                                                                : controller.datesAvailable[i].toString().substring(6, 7) == "10"
+                                                                                    ? "Oct"
+                                                                                    : controller.datesAvailable[i].toString().substring(6, 7) == "11"
+                                                                                        ? "Nov"
+                                                                                        : controller.datesAvailable[i].toString().substring(6, 7) == "12"
+                                                                                            ? "Dec"
+                                                                                            : "error",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
                                           ),
-                                        ),
+                                          SizedBox(
+                                            height: 11,
+                                          ),
+                                          Text(
+                                            controller.datesAvailable[i]
+                                                .toString()
+                                                .substring(8, 10),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   )
@@ -138,7 +193,41 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                             ),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  for (int i = 0;
+                                      i < controller.datesAvailable.length;
+                                      i++)
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: Get.height * 0.05,
+                                        width: Get.width * 0.2,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.darkPurple,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            controller.datesAvailable[i]
+                                                .toString()
+                                                .substring(11),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                ],
+                              ),
+                            ],
                           ),
                           ElevatedButton(
                             onPressed: () async {
@@ -149,21 +238,40 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                                   onChanged: (date) {
                                 print('change $date');
                               }, onConfirm: (date) {
-                                if (date.isAtSameMomentAs(
-                                  DateTime(
-                                      controller.minDate.year,
-                                      controller.minDate.month,
-                                      controller.minDate.day,
-                                      controller.minDate.hour,
-                                      controller.minDate.minute),
-                                )
-                                ) 
-                                {
-                                  print('confirm $date');
-                                  controller.selectedDate.value =
-                                      date.toString();
+                                if (controller.datesAvailable.contains(
+                                    date.toString().substring(0, 16))) {
+                                  Get.defaultDialog(
+                                      title: "کاتێک هەڵبژێرە",
+                                      middleText:
+                                          "ئەم کاتە هەڵبژێی؟ ${date.toString().substring(0, 16)}",
+                                      textConfirm: "بەڵێ",
+                                      textCancel: "نەخێر",
+                                      confirmTextColor: Colors.white,
+                                      cancelTextColor: AppColors.darkPurple,
+                                      buttonColor: AppColors.darkPurple,
+                                      onConfirm: () async {
+                                        await controller.setTheDateToDoctor(
+                                            date.toString().substring(0, 16));
+                                        Get.back();
+                                      },
+                                      onCancel: () {
+                                        Get.close;
+                                      });
                                 } else {
-                                  print("date not available");
+                                  Get.defaultDialog(
+                                      title: "کاتەکەت هەڵەیە ",
+                                      middleText:
+                                          "کاتەکەت هەڵەیە تکایە کاتێکی تر هەڵبژێرە",
+                                      textConfirm: "باش",
+                                      confirmTextColor: Colors.white,
+                                      cancelTextColor: AppColors.darkPurple,
+                                      buttonColor: AppColors.darkPurple,
+                                      onConfirm: () {
+                                        Get.close;
+                                      },
+                                      onCancel: () {
+                                        Get.close;
+                                      });
                                 }
                               }, currentTime: DateTime.now());
                             },
@@ -172,20 +280,12 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
-                              onPressed: controller.selectedDate.value == null
-                                  ? null
-                                  : () {
-                                      () async {
-                                        await controller
-                                            .checkIfCurrentUdserHasStars();
-                                      };
-                                    },
+                              onPressed: () async {
+                                await controller.checkIfCurrentUdserHasStars();
+                              },
                               child: Text('پەیوەندی بکە'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    controller.selectedDate.value == null
-                                        ? Colors.black
-                                        : AppColors.darkPurple,
+                                backgroundColor: AppColors.darkPurple,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32.0),
                                 ),

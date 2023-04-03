@@ -6,10 +6,7 @@ import 'package:happy_online_mobile/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
 class TherapistProfileController extends GetxController {
-  //TODO: Implement TherapistProfileController
-
   final Map<String, dynamic> args = Get.arguments;
-
   RxString userId = ''.obs;
   RxString userName = ''.obs;
   RxString userImage = ''.obs;
@@ -21,8 +18,25 @@ class TherapistProfileController extends GetxController {
   late DateTime minDate;
   RxList datesAvailable = [].obs;
   RxString selectedDate = ''.obs;
-
   RxList docList = [].obs;
+  RxList datesAvailableModified = [].obs;
+
+  Future setTheDateToDoctor(date) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    currentUser.value = auth.currentUser!.uid;
+    final usersCollection = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userId.value)
+        .collection('schedule')
+        .doc()
+        .set({
+      'date': date,
+      'patientId': currentUser.value,
+      'doctorId': userId.value,
+    });
+
+    print('done');
+  }
 
   userIdFromArgs() {
     userId.value = args['userId'];
@@ -45,12 +59,10 @@ class TherapistProfileController extends GetxController {
     List<dynamic> timestampList = docList[0]['available_date'];
     List<String> formattedDates = timestampList.map((timestamp) {
       DateTime dateTime = timestamp.toDate();
-      String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(dateTime);
-      return formattedDate;
+      String formattedDate = DateFormat('yyyy-MM-dd kk:mm').format(dateTime);
+      return formattedDate.toString().substring(0, 16);
     }).toList();
     datesAvailable.value = formattedDates;
-    
-    
   }
 
   Future checkIfCurrentUdserHasStars() async {
@@ -66,16 +78,14 @@ class TherapistProfileController extends GetxController {
 
     if (users.docs.length > 0) {
       Get.defaultDialog(
-        title: " ${userName.value}ئێستا پەیوەندی دەکەی بە",
+        title: " ${userName.value} ئێستا مەوعید دا ئەنێی لەگەڵ",
         middleText: "دڵنیای",
         textConfirm: "باشە",
         textCancel: "نەخێر",
         confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.toNamed(Routes.STARS, arguments: {
-            'userId': currentUser.value,
-          });
-          // Get.toNamed(Routes.HOME);
+        onConfirm: () async {
+          await reduceOneStarFromTheUser();
+          Get.toNamed(Routes.HOME);
         },
         onCancel: () => Get.close,
       );
@@ -94,6 +104,26 @@ class TherapistProfileController extends GetxController {
         },
         onCancel: () => Get.close,
       );
+    }
+  }
+
+  Future reduceOneStarFromTheUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    currentUser.value = _auth.currentUser!.uid;
+    final usersCollection = FirebaseFirestore.instance.collection('Users');
+
+    final QuerySnapshot users = await usersCollection
+        .where('uid', isEqualTo: currentUser.value)
+        .where('stars', isGreaterThan: 0)
+        .get();
+
+    if (users.docs.length > 0) {
+      users.docs.forEach((doc) {
+        usersCollection.doc(doc.id).update({
+          'stars': doc['stars'] - 1,
+        });
+      });
     }
   }
 

@@ -136,7 +136,10 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      FirebaseAuth.instance.signOut();
+                                      Get.offAll(() => const LoginView());
+                                    },
                                     icon: Icon(
                                       Icons.search_outlined,
                                       color: AppColors.darkPurple,
@@ -148,31 +151,28 @@ class HomeView extends GetView<HomeController> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: Get.height * 0.47,
-                            child: ListView.builder(
-                              itemCount: controller.docList.length,
-                              itemBuilder: (context, index) {
-                                return controller.docList.isEmpty
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : docContainer(
-                                        userName: controller.docList[index]
-                                            ['firstName'],
-                                        role: controller.docList[index]['role'],
-                                        onTap: () {
-                                          controller
-                                              .clickOnbookButtonForTherapist(
-                                                  controller.docList[index]
-                                                          ['uid']
-                                                      .toString());
-                                        },
-                                      );
-                              },
-                            ),
+                        Container(
+                          height: Get.height * 0.47,
+                          color: Colors.white,
+                          child: ListView.builder(
+                            itemCount: controller.docList.length,
+                            itemBuilder: (context, index) {
+                              return controller.docList.isEmpty
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : docContainer(
+                                      userName: controller.docList[index]
+                                          ['firstName'],
+                                      role: controller.docList[index]['role'],
+                                      onTap: () {
+                                        controller
+                                            .clickOnbookButtonForTherapist(
+                                                controller.docList[index]['uid']
+                                                    .toString());
+                                      },
+                                    );
+                            },
                           ),
                         ),
                       ],
