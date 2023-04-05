@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:get/get.dart';
+import 'package:happy_online_mobile/app/routes/app_pages.dart';
 
 class TherapistHomeController extends GetxController {
   //TODO: Implement TherapistHomeController
@@ -48,13 +50,20 @@ class TherapistHomeController extends GetxController {
     date.value = datesAvailable[0]['date'];
   }
 
+  sendUsertoChatScreen(senderId, reciepientId) {
+    Get.toNamed(Routes.CHAT_SCREEN, arguments: {
+      'senderId': senderId,
+      'reciepientId': reciepientId,
+    });
+  }
+
   final count = 0.obs;
   @override
   Future<void> onInit() async {
     userIdFromArgs();
     await getTheTherapistInfo(userId.value);
     await getTheSchedual(userId.value);
-    print(datesAvailable);
+
     super.onInit();
   }
 

@@ -36,10 +36,16 @@ class HomeController extends GetxController {
   changeIndex(index) {
     switch (index) {
       case 0:
-        Get.toNamed(Routes.HOME);
+        Get.to(Routes.HOME,
+            transition: Transition.rightToLeftWithFade,
+            duration: Duration(
+              milliseconds: 500,
+            ));
         break;
       case 1:
-        Get.toNamed(Routes.VIDEO_ROOM);
+        Get.toNamed(
+          Routes.CHATS,
+        );
         break;
       case 2:
         Get.toNamed(Routes.SIGN_UP);

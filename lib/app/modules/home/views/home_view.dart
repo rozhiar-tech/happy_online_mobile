@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
                 bottomNavigationBar: AnimatedBottomNavigationBar(
                   icons: [
                     Icons.home,
-                    Icons.search,
+                    LineIcons.comment,
                     Icons.favorite,
                     Icons.person,
                   ],

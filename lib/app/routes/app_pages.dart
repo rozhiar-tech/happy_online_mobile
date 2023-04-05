@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/chat_screen/bindings/chat_screen_binding.dart';
+import '../modules/chat_screen/views/chat_screen_view.dart';
+import '../modules/chats/bindings/chats_binding.dart';
+import '../modules/chats/views/chats_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -16,8 +20,6 @@ import '../modules/therapist_profile/bindings/therapist_profile_binding.dart';
 import '../modules/therapist_profile/views/therapist_profile_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
 import '../modules/user_profile/views/user_profile_view.dart';
-import '../modules/video_room/bindings/video_room_binding.dart';
-import '../modules/video_room/views/video_room_view.dart';
 
 part 'app_routes.dart';
 
@@ -63,14 +65,19 @@ class AppPages {
       binding: StarsBinding(),
     ),
     GetPage(
-      name: _Paths.VIDEO_ROOM,
-      page: () => const VideoRoomView(),
-      binding: VideoRoomBinding(),
-    ),
-    GetPage(
       name: _Paths.THERAPIST_HOME,
       page: () => const TherapistHomeView(),
       binding: TherapistHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_SCREEN,
+      page: () => const ChatScreenView(),
+      binding: ChatScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHATS,
+      page: () => const ChatsView(),
+      binding: ChatsBinding(),
     ),
   ];
 }

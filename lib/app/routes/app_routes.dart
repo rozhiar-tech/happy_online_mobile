@@ -10,8 +10,9 @@ abstract class Routes {
   static const PAYMENT = _Paths.PAYMENT;
   static const USER_PROFILE = _Paths.USER_PROFILE;
   static const STARS = _Paths.STARS;
-  static const VIDEO_ROOM = _Paths.VIDEO_ROOM;
   static const THERAPIST_HOME = _Paths.THERAPIST_HOME;
+  static const CHAT_SCREEN = _Paths.CHAT_SCREEN;
+  static const CHATS = _Paths.CHATS;
 }
 
 abstract class _Paths {
@@ -23,6 +24,7 @@ abstract class _Paths {
   static const PAYMENT = '/payment';
   static const USER_PROFILE = '/user-profile';
   static const STARS = '/stars';
-  static const VIDEO_ROOM = '/video-room';
   static const THERAPIST_HOME = '/therapist-home';
+  static const CHAT_SCREEN = '/chat-screen';
+  static const CHATS = '/chats';
 }
