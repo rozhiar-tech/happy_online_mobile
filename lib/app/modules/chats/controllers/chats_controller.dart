@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 
 class ChatsController extends GetxController {
+  RxString doctorId = ''.obs;
+  RxString patientId = ''.obs;
+  RxString docName = ''.obs;
+  RxList doclist = [].obs;
+  
   //TODO: Implement ChatsController
 
   RxString currentUserId = ''.obs;
@@ -24,11 +30,16 @@ class ChatsController extends GetxController {
     }
   }
 
+   
+
+
+
   final count = 0.obs;
   @override
-  void onInit() {
+  Future<void> onInit() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     currentUserId.value = auth.currentUser!.uid;
+
     super.onInit();
   }
 

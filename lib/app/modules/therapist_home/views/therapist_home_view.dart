@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,25 @@ class TherapistHomeView extends GetView<TherapistHomeController> {
         init: TherapistHomeController(),
         builder: (controller) {
           return Scaffold(
+            bottomNavigationBar: AnimatedBottomNavigationBar(
+              icons: [
+                Icons.home,
+                LineIcons.comment,
+              ],
+              activeIndex: 0,
+              gapLocation: GapLocation.none,
+              notchSmoothness: NotchSmoothness.softEdge,
+              leftCornerRadius: 32,
+              rightCornerRadius: 32,
+              onTap: (index) {
+                controller.changeIndex(index);
+              },
+              activeColor: AppColors.darkPurple,
+              inactiveColor: Colors.grey,
+              splashColor: AppColors.darkPurple,
+              splashSpeedInMilliseconds: 300,
+         
+            ),
             body: SafeArea(
               child: Container(
                 height: Get.height,
@@ -103,14 +123,14 @@ class TherapistHomeView extends GetView<TherapistHomeController> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: IconButton(
-                                                onPressed: () {
+                                                onPressed: () async {
+                                                  await controller.createChatRoom(
+                                                      controller.datesAvailable[
+                                                          index]['doctorId'],
+                                                      controller.datesAvailable[
+                                                          index]['patientId']);
                                                   controller
-                                                      .sendUsertoChatScreen(
-                                                    controller.datesAvailable[
-                                                        index]['doctorId'],
-                                                    controller.datesAvailable[
-                                                        index]['patientId'],
-                                                  );
+                                                      .sendUsertoChatScreen();
                                                 },
                                                 icon: const Icon(
                                                   LineIcons.phoneVolume,

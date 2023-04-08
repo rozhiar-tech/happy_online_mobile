@@ -15,6 +15,7 @@ class TherapistHomeController extends GetxController {
   RxList docList = [].obs;
   RxList datesAvailable = [].obs;
   RxString date = ''.obs;
+  RxString newChatRoomId = ''.obs;
 
   userIdFromArgs() {
     userId.value = args['userId'];
@@ -50,10 +51,33 @@ class TherapistHomeController extends GetxController {
     date.value = datesAvailable[0]['date'];
   }
 
-  sendUsertoChatScreen(senderId, reciepientId) {
+  final chatRoomRef = FirebaseFirestore.instance.collection('chatRooms');
+  Future createChatRoom(doctorId, patientId) async {
+    final newChatRoomDoc = await chatRoomRef.add({
+      'members': [doctorId, patientId],
+      'lastMessage': {
+        'text': '',
+        'timestamp': DateTime.now(),
+        'senderId': '',
+      },
+    });
+    newChatRoomId.value = newChatRoomDoc.id;
+  }
+
+  changeIndex(index) {
+    switch (index) {
+      case 0:
+        Get.toNamed(Routes.THERAPIST_HOME);
+        break;
+      case 1:
+        Get.toNamed(Routes.CHATS);
+        break;
+    }
+  }
+
+  sendUsertoChatScreen() {
     Get.toNamed(Routes.CHAT_SCREEN, arguments: {
-      'senderId': senderId,
-      'reciepientId': reciepientId,
+      'chatRoomId': newChatRoomId.value,
     });
   }
 

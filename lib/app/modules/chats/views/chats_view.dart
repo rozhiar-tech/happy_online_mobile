@@ -66,31 +66,33 @@ class ChatsView extends GetView<ChatsController> {
             body: SafeArea(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection("UserMessages")
-                    .doc(controller.currentUserId.value)
-                    .collection("messages")
+                    .collection('chatRooms')
+                    .where('members',
+                        arrayContains: controller.currentUserId.value)
                     .snapshots(),
                 builder: (context, snapshot) {
+                  print("snapshot ${snapshot.data!.docs.length}");
+
                   if (snapshot.hasData) {
                     print("has data ${snapshot.data!.docs.length}");
-                    return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.CHAT_SCREEN, arguments: {
-                                "senderId": controller.currentUserId.value,
-                                "recipientId": snapshot.data!.docs[index]['id'],
-                                "recipientName": snapshot.data!.docs[index]
-                                    ['name'],
-                              });
-                            },
-                            leading: Text("${index + 1}"),
-                          ),
+                    return ListView(
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        final data = document.data() as Map<String, dynamic>;
+                        final members = List<String>.from(data['members']);
+                        members.remove(controller.currentUserId.value);
+                        final otherUserId = members.first;
+                        final lastMessage = data['lastMessage'];
+                        return ListTile(
+                          title: Text('Chat with $otherUserId'),
+                          subtitle: Text(lastMessage['text']),
+                          onTap: () {
+                            Get.toNamed(Routes.CHAT_SCREEN, arguments: {
+                              'chatRoomId': document.id,
+                            });
+                          },
                         );
-                      },
+                      }).toList(),
                     );
                   } else {
                     return Center(

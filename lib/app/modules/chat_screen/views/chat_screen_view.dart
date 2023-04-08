@@ -20,40 +20,40 @@ class ChatScreenView extends GetView<ChatScreenController> {
                   Expanded(
                     child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
-                          .collection("Messages")
-                          .doc(controller.senderId.value +
-                              controller.recipientId.value)
-                          .collection("chats")
+                          .collection('chatRooms')
+                          .doc(controller.chatRoomId.value)
+                          .collection('messages')
                           .orderBy('timestamp', descending: true)
                           .snapshots(),
-                      builder: (context, snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasData) {
-                          print("has data ${snapshot.data!.docs.length}");
+                          final messages = snapshot.data!.docs;
+
                           return ListView.builder(
                             reverse: true,
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: (context, index) {
+                              final message = messages[index];
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
-                                  mainAxisAlignment: controller
-                                              .senderId.value ==
-                                          snapshot.data!.docs[index]['senderId']
+                                  mainAxisAlignment: message['senderId'] ==
+                                          controller.currentUser.value
                                       ? MainAxisAlignment.end
                                       : MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: controller.senderId.value ==
-                                                snapshot.data!.docs[index]
-                                                    ['senderId']
+                                        color: message['senderId'] ==
+                                                controller.currentUser.value
                                             ? Colors.blue
                                             : Colors.red,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       padding: EdgeInsets.all(10),
                                       child: Text(
-                                        snapshot.data!.docs[index]['text'],
+                                        message['text'],
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -62,9 +62,7 @@ class ChatScreenView extends GetView<ChatScreenController> {
                                     SizedBox(width: 10),
                                     Text(
                                       DateFormat('hh:mm')
-                                          .format(snapshot
-                                              .data!.docs[index]['timestamp']
-                                              .toDate())
+                                          .format(message['timestamp'].toDate())
                                           .toString(),
                                       style: TextStyle(
                                         color: Colors.grey,
@@ -91,8 +89,8 @@ class ChatScreenView extends GetView<ChatScreenController> {
                         Expanded(
                           child: TextField(
                             controller: controller.messageController,
-                            decoration:
-                                InputDecoration(hintText: 'Type a message...'),
+                            decoration: InputDecoration(
+                                hintText: controller.hintText.value),
                           ),
                         ),
                         SizedBox(width: 8),
@@ -100,13 +98,9 @@ class ChatScreenView extends GetView<ChatScreenController> {
                           onPressed: () {
                             if (controller.messageController.text.isNotEmpty) {
                               controller.sendMessage(
-                                  controller.senderId.value,
-                                  controller.recipientId.value,
+                                  controller.chatRoomId.value,
                                   controller.messageController.text);
-                              controller.setUserMessages(
-                                  controller.senderId.value,
-                                  controller.recipientId.value,
-                                  controller.messageController.text);
+
                               controller.messageController.clear();
                             }
                           },
