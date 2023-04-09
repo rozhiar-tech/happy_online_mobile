@@ -85,6 +85,7 @@ class TherapistProfileController extends GetxController {
         confirmTextColor: Colors.white,
         onConfirm: () async {
           await reduceOneStarFromTheUser();
+          await setTheDateToDoctor(DateTime.now().toString());
           Get.toNamed(Routes.HOME);
         },
         onCancel: () => Get.close,

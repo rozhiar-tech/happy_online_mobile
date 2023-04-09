@@ -136,9 +136,12 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () {
-                                      FirebaseAuth.instance.signOut();
-                                      Get.offAll(() => const LoginView());
+                                    onPressed: () async {
+                                      controller.searchForUsers(
+                                          controller.searchText.value);
+                                      if (controller.searchText.value == '') {
+                                        await controller.getTherapistUsers();
+                                      }
                                     },
                                     icon: Icon(
                                       Icons.search_outlined,
@@ -152,7 +155,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         Container(
-                          height: Get.height * 0.47,
+                          height: Get.height * 0.54,
                           color: Colors.white,
                           child: ListView.builder(
                             itemCount: controller.docList.length,

@@ -19,7 +19,7 @@ class ChatsView extends GetView<ChatsController> {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                controller.currentUserId.value,
+                "Chats",
                 style: TextStyle(
                   color: AppColors.darkPurple,
                   fontSize: 20,
@@ -43,8 +43,6 @@ class ChatsView extends GetView<ChatsController> {
               icons: [
                 Icons.home,
                 LineIcons.comment,
-                Icons.favorite,
-                Icons.person,
               ],
               activeIndex: 1,
               gapLocation: GapLocation.none,
@@ -71,10 +69,7 @@ class ChatsView extends GetView<ChatsController> {
                         arrayContains: controller.currentUserId.value)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  print("snapshot ${snapshot.data!.docs.length}");
-
                   if (snapshot.hasData) {
-                    print("has data ${snapshot.data!.docs.length}");
                     return ListView(
                       children:
                           snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -82,15 +77,52 @@ class ChatsView extends GetView<ChatsController> {
                         final members = List<String>.from(data['members']);
                         members.remove(controller.currentUserId.value);
                         final otherUserId = members.first;
+                        controller.doctorUid.value = otherUserId;
                         final lastMessage = data['lastMessage'];
-                        return ListTile(
-                          title: Text('Chat with $otherUserId'),
-                          subtitle: Text(lastMessage['text']),
-                          onTap: () {
-                            Get.toNamed(Routes.CHAT_SCREEN, arguments: {
-                              'chatRoomId': document.id,
-                            });
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(Routes.CHAT_SCREEN, arguments: {
+                                'chatRoomId': document.id,
+                              });
+                            },
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColors.darkPurple,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: ListTile(
+                                // style: ListTileStyle.list,
+                                // dense: true,
+                                title: Text(
+                                  'Chat with Doctor',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  lastMessage['text'],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         );
                       }).toList(),
                     );

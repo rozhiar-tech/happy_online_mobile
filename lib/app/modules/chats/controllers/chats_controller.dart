@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -9,14 +11,35 @@ class ChatsController extends GetxController {
   RxString patientId = ''.obs;
   RxString docName = ''.obs;
   RxList doclist = [].obs;
-  
+  RxList doclist2 = [].obs;
+  RxString doctorUid = ''.obs;
+
+  checkIfcurrentUserIsnormalUser() async {
+    final usersCollection = FirebaseFirestore.instance.collection('Users');
+
+    final QuerySnapshot users = await usersCollection
+        .where('uid', isEqualTo: currentUserId.value)
+        .where('role', isEqualTo: 'user')
+        .get();
+
+    doclist2.value = users.docs;
+
+    if (doclist2.length > 0) {
+      Get.toNamed(Routes.HOME);
+    } else {
+      Get.toNamed(Routes.THERAPIST_HOME, arguments: {
+        'userId': currentUserId.value,
+      });
+    }
+  }
+
   //TODO: Implement ChatsController
 
   RxString currentUserId = ''.obs;
-  changeIndex(index) {
+  changeIndex(index) async {
     switch (index) {
       case 0:
-        Get.toNamed(Routes.HOME);
+        await checkIfcurrentUserIsnormalUser();
         break;
       case 1:
         Get.toNamed(Routes.CHATS);
@@ -30,15 +53,27 @@ class ChatsController extends GetxController {
     }
   }
 
-   
+  getDoctorName(uid) async {
+    final usersCollection = FirebaseFirestore.instance.collection('Users');
 
+    final QuerySnapshot users =
+        await usersCollection.where('uid', isEqualTo: uid).get();
 
+    doclist2.value = users.docs;
+
+    if (doclist2.length > 0) {
+      docName.value = doclist2[0]['firstName'];
+    } else {
+      docName.value = 'Doctor';
+    }
+  }
 
   final count = 0.obs;
   @override
-  Future<void> onInit() async {
+  onInit() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     currentUserId.value = auth.currentUser!.uid;
+    await getDoctorName(doctorUid.value);
 
     super.onInit();
   }

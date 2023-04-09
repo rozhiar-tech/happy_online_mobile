@@ -13,6 +13,8 @@ abstract class Routes {
   static const THERAPIST_HOME = _Paths.THERAPIST_HOME;
   static const CHAT_SCREEN = _Paths.CHAT_SCREEN;
   static const CHATS = _Paths.CHATS;
+  static const SCHEDUALE = _Paths.SCHEDUALE;
+  static const FAVIORETS = _Paths.FAVIORETS;
 }
 
 abstract class _Paths {
@@ -27,4 +29,6 @@ abstract class _Paths {
   static const THERAPIST_HOME = '/therapist-home';
   static const CHAT_SCREEN = '/chat-screen';
   static const CHATS = '/chats';
+  static const SCHEDUALE = '/scheduale';
+  static const FAVIORETS = '/faviorets';
 }

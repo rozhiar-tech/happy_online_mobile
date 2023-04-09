@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SignUpController extends GetxController {
   //TODO: Implement SignUpController
 
@@ -12,7 +11,7 @@ class SignUpController extends GetxController {
   RxString passwordConfirm = "".obs;
   RxString name = "".obs;
   RxString phone = "".obs;
-  RxString signUpText = "جونە بڕۆ".obs;
+  RxString signUpText = "دروستکردن".obs;
   RxString lastName = "".obs;
   RxString nationalCode = "".obs;
 
@@ -28,13 +27,14 @@ class SignUpController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       await firestore.collection("Users").doc(userCredential.user!.uid).set({
-        "name": name,
+        "firstName": name,
         "phone": phone,
         "lastName": lastName,
         "nationalCode": nationalCode,
         "email": email,
         "uid": userCredential.user!.uid,
         "role": "user",
+        "stars": 0,
       });
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('uid', userCredential.user!.uid);

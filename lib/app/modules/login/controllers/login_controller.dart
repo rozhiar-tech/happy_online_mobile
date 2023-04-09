@@ -45,9 +45,16 @@ class LoginController extends GetxController {
     }
   }
 
+  checkIfUserisTherapistOrNormaluser2() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var uid = prefs.getString('uid');
+    checkIfUserIsTherapistOrNormalUser(uid);
+  }
+
   final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
+    await checkIfUserisTherapistOrNormaluser2();
     super.onInit();
   }
 

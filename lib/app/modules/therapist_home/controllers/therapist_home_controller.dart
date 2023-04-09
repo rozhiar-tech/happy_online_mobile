@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:get/get.dart';
 import 'package:happy_online_mobile/app/routes/app_pages.dart';
@@ -16,6 +18,7 @@ class TherapistHomeController extends GetxController {
   RxList datesAvailable = [].obs;
   RxString date = ''.obs;
   RxString newChatRoomId = ''.obs;
+  RxBool chatRoomCreated = false.obs;
 
   userIdFromArgs() {
     userId.value = args['userId'];
@@ -62,6 +65,7 @@ class TherapistHomeController extends GetxController {
       },
     });
     newChatRoomId.value = newChatRoomDoc.id;
+    chatRoomCreated.value = true;
   }
 
   changeIndex(index) {
@@ -73,6 +77,12 @@ class TherapistHomeController extends GetxController {
         Get.toNamed(Routes.CHATS);
         break;
     }
+  }
+
+  signOut() async {
+    
+    await FirebaseAuth.instance.signOut();
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   sendUsertoChatScreen() {

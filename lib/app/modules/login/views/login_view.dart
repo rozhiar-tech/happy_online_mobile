@@ -19,119 +19,122 @@ class LoginView extends GetView<LoginController> {
               body: Container(
                 height: Get.height,
                 width: Get.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: Get.height * 0.6,
-                      width: Get.width,
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage(
-                              "assets/splash.jpg",
-                            ),
-                          ),
-                          Text("ژوورەوە"),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: Get.height * 0.1,
-                            width: Get.width * 0.8,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      BorderSide(color: AppColors.lightPink),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      BorderSide(color: AppColors.lightPink),
-                                ),
-                                labelText: 'ئیمەیل',
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: Get.height * 0.7,
+                        width: Get.width,
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundImage: AssetImage(
+                                "assets/splash.jpg",
                               ),
-                              onChanged: (value) =>
-                                  controller.email.value = value,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: Get.height * 0.1,
-                            width: Get.width * 0.8,
-                            child: TextField(
-                              // textAlign: TextAlign.end,
-                              obscureText: true,
-                              textDirection: TextDirection.ltr,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide:
-                                      BorderSide(color: AppColors.lightPink),
-                                ),
-                                labelText: 'تێپەر وشە',
-                              ),
-                              onChanged: (value) =>
-                                  controller.password.value = value,
+                            Text("ژوورەوە"),
+                            SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: 50,
-                            width: Get.width * 0.8,
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  await controller.login(controller.email.value,
-                                      controller.password.value);
-                                },
-                                child: Text(controller.loginText.value),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.lightPink,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0),
+                            Container(
+                              height: Get.height * 0.1,
+                              width: Get.width * 0.8,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        BorderSide(color: AppColors.lightPink),
                                   ),
-                                )),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        BorderSide(color: AppColors.lightPink),
+                                  ),
+                                  labelText: 'ئیمەیل',
+                                ),
+                                onChanged: (value) =>
+                                    controller.email.value = value,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: Get.height * 0.1,
+                              width: Get.width * 0.8,
+                              child: TextField(
+                                // textAlign: TextAlign.end,
+                                obscureText: true,
+                                textDirection: TextDirection.ltr,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: AppColors.lightPink),
+                                  ),
+                                  labelText: 'تێپەر وشە',
+                                ),
+                                onChanged: (value) =>
+                                    controller.password.value = value,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
                               height: 50,
                               width: Get.width * 0.8,
-                              child: Row(
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.toNamed(Routes.SIGN_UP);
-                                    },
-                                    child: Text(
-                                      "تۆماربکە",
-                                      style:
-                                          TextStyle(color: AppColors.lightPink),
+                              child: ElevatedButton(
+                                  onPressed: () async {
+                                    await controller.login(
+                                        controller.email.value,
+                                        controller.password.value);
+                                  },
+                                  child: Text(controller.loginText.value),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.lightPink,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(32.0),
                                     ),
-                                  ),
-                                  Text("هەژمارت نییە؟"),
-                                ],
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                                height: 50,
+                                width: Get.width * 0.8,
+                                child: Row(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.toNamed(Routes.SIGN_UP);
+                                      },
+                                      child: Text(
+                                        "تۆماربکە",
+                                        style: TextStyle(
+                                            color: AppColors.lightPink),
+                                      ),
+                                    ),
+                                    Text("هەژمارت نییە؟"),
+                                  ],
+                                )),
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

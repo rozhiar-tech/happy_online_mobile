@@ -34,7 +34,6 @@ class TherapistHomeView extends GetView<TherapistHomeController> {
               inactiveColor: Colors.grey,
               splashColor: AppColors.darkPurple,
               splashSpeedInMilliseconds: 300,
-         
             ),
             body: SafeArea(
               child: Container(
@@ -48,12 +47,29 @@ class TherapistHomeView extends GetView<TherapistHomeController> {
                         width: Get.width,
                         child: Column(
                           children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                controller.userImage.value,
-                                scale: 0.5,
-                              ),
-                              radius: 50,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      controller.userImage.value,
+                                      scale: 0.5,
+                                    ),
+                                    radius: 50,
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      Get.defaultDialog(
+                                        title: 'Signing Out',
+                                        content: CircularProgressIndicator(),
+                                        onConfirm: () => controller.signOut(),
+                                      );
+                                    },
+                                    icon: Icon(Icons.logout))
+                              ],
                             ),
                             Text(
                               controller.userName.value,
@@ -91,59 +107,80 @@ class TherapistHomeView extends GetView<TherapistHomeController> {
                                       ),
                                     ),
                                   )
-                                : SizedBox(
-                                    height: Get.height * 0.2,
-                                    width: Get.width,
-                                    // color: Colors.grey[200],
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: Get.height * 0.09,
-                                        width: Get.width,
-                                        decoration: const BoxDecoration(
-                                          color: AppColors.lightPink,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10),
+                                : controller.chatRoomCreated.value
+                                    ? const Center(
+                                        child: Text(
+                                          'You have already created a chat room',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.darkPurple,
                                           ),
                                         ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              controller.datesAvailable[index]
-                                                  ['date'],
-                                              style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
+                                      )
+                                    : SizedBox(
+                                        height: Get.height * 0.2,
+                                        width: Get.width,
+                                        // color: Colors.grey[200],
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            height: Get.height * 0.09,
+                                            width: Get.width,
+                                            decoration: BoxDecoration(
+                                              color: controller
+                                                      .chatRoomCreated.value
+                                                  ? Colors.grey
+                                                  : AppColors.darkPurple,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
                                               ),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: IconButton(
-                                                onPressed: () async {
-                                                  await controller.createChatRoom(
-                                                      controller.datesAvailable[
-                                                          index]['doctorId'],
-                                                      controller.datesAvailable[
-                                                          index]['patientId']);
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
                                                   controller
-                                                      .sendUsertoChatScreen();
-                                                },
-                                                icon: const Icon(
-                                                  LineIcons.phoneVolume,
-                                                  color: Colors.white,
-                                                  size: 30,
+                                                          .datesAvailable[index]
+                                                      ['date'],
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: IconButton(
+                                                    onPressed: controller
+                                                            .chatRoomCreated
+                                                            .value
+                                                        ? null
+                                                        : () async {
+                                                            await controller.createChatRoom(
+                                                                controller.datesAvailable[
+                                                                        index][
+                                                                    'doctorId'],
+                                                                controller.datesAvailable[
+                                                                        index][
+                                                                    'patientId']);
+                                                            controller
+                                                                .sendUsertoChatScreen();
+                                                          },
+                                                    icon: const Icon(
+                                                      LineIcons.phoneVolume,
+                                                      color: Colors.white,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
+                                      );
                           },
                         ),
                       ),

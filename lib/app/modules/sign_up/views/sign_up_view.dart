@@ -115,69 +115,14 @@ class SignUpView extends GetView<SignUpController> {
                           onChanged: (value) => controller.name.value = value,
                         ),
                       ),
-                      Container(
-                        height: Get.height * 0.1,
-                        width: Get.width * 0.8,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            labelText: 'ناوی خانوادە',
-                          ),
-                          onChanged: (value) =>
-                              controller.lastName.value = value,
-                        ),
-                      ),
-                      Container(
-                        height: Get.height * 0.1,
-                        width: Get.width * 0.8,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            labelText: 'ژمارەی موبایل',
-                          ),
-                          onChanged: (value) => controller.phone.value = value,
-                        ),
-                      ),
-                      Container(
-                        height: Get.height * 0.1,
-                        width: Get.width * 0.8,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:
-                                  BorderSide(color: AppColors.lightPink),
-                            ),
-                            labelText: 'ژمارەی شناسایی',
-                          ),
-                          onChanged: (value) =>
-                              controller.nationalCode.value = value,
-                        ),
-                      ),
                       ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: AppColors.lightPink,
+                            onPrimary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
+                          ),
                           onPressed: () async {
                             await controller.signUp(
                               controller.email.value,

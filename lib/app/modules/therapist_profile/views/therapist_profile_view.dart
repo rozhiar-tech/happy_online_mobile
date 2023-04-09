@@ -93,190 +93,190 @@ class TherapistProfileView extends GetView<TherapistProfileController> {
                               ),
                             ),
                           ),
-                          const Text(
-                            'کاتەکانی بەردەست',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: AppColors.darkPurple,
-                              fontSize: 20,
-                            ),
-                          ),
+                          // const Text(
+                          //   'کاتەکانی بەردەست',
+                          //   textAlign: TextAlign.left,
+                          //   style: TextStyle(
+                          //     color: AppColors.darkPurple,
+                          //     fontSize: 20,
+                          //   ),
+                          // ),
                           SizedBox(
                             height: 20,
                           ),
-                          SingleChildScrollView(
-                            child: Row(
-                              children: [
-                                for (int i = 0;
-                                    i < controller.datesAvailable.length;
-                                    i++)
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: Get.height * 0.1,
-                                      width: Get.width * 0.15,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.darkPurple,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            controller.datesAvailable[i]
-                                                        .toString()
-                                                        .substring(6, 7) ==
-                                                    "1"
-                                                ? "Jan"
-                                                : controller.datesAvailable[i]
-                                                            .toString()
-                                                            .substring(6, 7) ==
-                                                        "2"
-                                                    ? "Feb"
-                                                    : controller.datesAvailable[i]
-                                                                .toString()
-                                                                .substring(
-                                                                    6, 7) ==
-                                                            "3"
-                                                        ? "Mar"
-                                                        : controller.datesAvailable[i]
-                                                                    .toString()
-                                                                    .substring(
-                                                                        6, 7) ==
-                                                                "4"
-                                                            ? "Apr"
-                                                            : controller.datesAvailable[i]
-                                                                        .toString()
-                                                                        .substring(
-                                                                            6, 7) ==
-                                                                    "5"
-                                                                ? "May"
-                                                                : controller.datesAvailable[i].toString().substring(6, 7) ==
-                                                                        "6"
-                                                                    ? "Jun"
-                                                                    : controller.datesAvailable[i].toString().substring(6, 7) == "7"
-                                                                        ? "Jul"
-                                                                        : controller.datesAvailable[i].toString().substring(6, 7) == "8"
-                                                                            ? "Aug"
-                                                                            : controller.datesAvailable[i].toString().substring(6, 7) == "9"
-                                                                                ? "Sep"
-                                                                                : controller.datesAvailable[i].toString().substring(6, 7) == "10"
-                                                                                    ? "Oct"
-                                                                                    : controller.datesAvailable[i].toString().substring(6, 7) == "11"
-                                                                                        ? "Nov"
-                                                                                        : controller.datesAvailable[i].toString().substring(6, 7) == "12"
-                                                                                            ? "Dec"
-                                                                                            : "error",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 11,
-                                          ),
-                                          Text(
-                                            controller.datesAvailable[i]
-                                                .toString()
-                                                .substring(8, 10),
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                              ],
-                            ),
-                          ),
+                          // SingleChildScrollView(
+                          //   child: Row(
+                          //     children: [
+                          //       for (int i = 0;
+                          //           i < controller.datesAvailable.length;
+                          //           i++)
+                          //         Padding(
+                          //           padding: const EdgeInsets.all(8.0),
+                          //           child: Container(
+                          //             height: Get.height * 0.1,
+                          //             width: Get.width * 0.15,
+                          //             decoration: BoxDecoration(
+                          //               color: AppColors.darkPurple,
+                          //               borderRadius: BorderRadius.circular(10),
+                          //             ),
+                          //             child: Column(
+                          //               mainAxisAlignment:
+                          //                   MainAxisAlignment.center,
+                          //               children: [
+                          //                 Text(
+                          //                   controller.datesAvailable[i]
+                          //                               .toString()
+                          //                               .substring(6, 7) ==
+                          //                           "1"
+                          //                       ? "Jan"
+                          //                       : controller.datesAvailable[i]
+                          //                                   .toString()
+                          //                                   .substring(6, 7) ==
+                          //                               "2"
+                          //                           ? "Feb"
+                          //                           : controller.datesAvailable[i]
+                          //                                       .toString()
+                          //                                       .substring(
+                          //                                           6, 7) ==
+                          //                                   "3"
+                          //                               ? "Mar"
+                          //                               : controller.datesAvailable[i]
+                          //                                           .toString()
+                          //                                           .substring(
+                          //                                               6, 7) ==
+                          //                                       "4"
+                          //                                   ? "Apr"
+                          //                                   : controller.datesAvailable[i]
+                          //                                               .toString()
+                          //                                               .substring(
+                          //                                                   6, 7) ==
+                          //                                           "5"
+                          //                                       ? "May"
+                          //                                       : controller.datesAvailable[i].toString().substring(6, 7) ==
+                          //                                               "6"
+                          //                                           ? "Jun"
+                          //                                           : controller.datesAvailable[i].toString().substring(6, 7) == "7"
+                          //                                               ? "Jul"
+                          //                                               : controller.datesAvailable[i].toString().substring(6, 7) == "8"
+                          //                                                   ? "Aug"
+                          //                                                   : controller.datesAvailable[i].toString().substring(6, 7) == "9"
+                          //                                                       ? "Sep"
+                          //                                                       : controller.datesAvailable[i].toString().substring(6, 7) == "10"
+                          //                                                           ? "Oct"
+                          //                                                           : controller.datesAvailable[i].toString().substring(6, 7) == "11"
+                          //                                                               ? "Nov"
+                          //                                                               : controller.datesAvailable[i].toString().substring(6, 7) == "12"
+                          //                                                                   ? "Dec"
+                          //                                                                   : "error",
+                          //                   style: TextStyle(
+                          //                     color: Colors.white,
+                          //                     fontSize: 12,
+                          //                   ),
+                          //                 ),
+                          //                 SizedBox(
+                          //                   height: 11,
+                          //                 ),
+                          //                 Text(
+                          //                   controller.datesAvailable[i]
+                          //                       .toString()
+                          //                       .substring(8, 10),
+                          //                   style: TextStyle(
+                          //                     color: Colors.white,
+                          //                     fontSize: 20,
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ),
+                          //         )
+                          //     ],
+                          //   ),
+                          // ),
                           SizedBox(
                             height: 10,
                           ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  for (int i = 0;
-                                      i < controller.datesAvailable.length;
-                                      i++)
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: Get.height * 0.05,
-                                        width: Get.width * 0.2,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.darkPurple,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            controller.datesAvailable[i]
-                                                .toString()
-                                                .substring(11),
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                ],
-                              ),
-                            ],
-                          ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              DatePicker.showDateTimePicker(context,
-                                  showTitleActions: true,
-                                  minTime: DateTime(2021, 3, 5),
-                                  maxTime: DateTime(2021, 6, 7),
-                                  onChanged: (date) {
-                                print('change $date');
-                              }, onConfirm: (date) {
-                                if (controller.datesAvailable.contains(
-                                    date.toString().substring(0, 16))) {
-                                  Get.defaultDialog(
-                                      title: "کاتێک هەڵبژێرە",
-                                      middleText:
-                                          "ئەم کاتە هەڵبژێی؟ ${date.toString().substring(0, 16)}",
-                                      textConfirm: "بەڵێ",
-                                      textCancel: "نەخێر",
-                                      confirmTextColor: Colors.white,
-                                      cancelTextColor: AppColors.darkPurple,
-                                      buttonColor: AppColors.darkPurple,
-                                      onConfirm: () async {
-                                        await controller.setTheDateToDoctor(
-                                            date.toString().substring(0, 16));
-                                        Get.back();
-                                      },
-                                      onCancel: () {
-                                        Get.close;
-                                      });
-                                } else {
-                                  Get.defaultDialog(
-                                      title: "کاتەکەت هەڵەیە ",
-                                      middleText:
-                                          "کاتەکەت هەڵەیە تکایە کاتێکی تر هەڵبژێرە",
-                                      textConfirm: "باش",
-                                      confirmTextColor: Colors.white,
-                                      cancelTextColor: AppColors.darkPurple,
-                                      buttonColor: AppColors.darkPurple,
-                                      onConfirm: () {
-                                        Get.close;
-                                      },
-                                      onCancel: () {
-                                        Get.close;
-                                      });
-                                }
-                              }, currentTime: DateTime.now());
-                            },
-                            child: const Text("کاتێک هەڵبژێرە"),
-                          ),
+                          // Column(
+                          //   children: [
+                          //     Row(
+                          //       children: [
+                          //         for (int i = 0;
+                          //             i < controller.datesAvailable.length;
+                          //             i++)
+                          //           Padding(
+                          //             padding: const EdgeInsets.all(8.0),
+                          //             child: Container(
+                          //               height: Get.height * 0.05,
+                          //               width: Get.width * 0.2,
+                          //               decoration: BoxDecoration(
+                          //                 color: AppColors.darkPurple,
+                          //                 borderRadius:
+                          //                     BorderRadius.circular(10),
+                          //               ),
+                          //               child: Center(
+                          //                 child: Text(
+                          //                   controller.datesAvailable[i]
+                          //                       .toString()
+                          //                       .substring(11),
+                          //                   style: TextStyle(
+                          //                     color: Colors.white,
+                          //                     fontSize: 12,
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           )
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () async {
+                          //     DatePicker.showDateTimePicker(context,
+                          //         showTitleActions: true,
+                          //         minTime: DateTime(2021, 3, 5),
+                          //         maxTime: DateTime(2021, 6, 7),
+                          //         onChanged: (date) {
+                          //       print('change $date');
+                          //     }, onConfirm: (date) {
+                          //       if (controller.datesAvailable.contains(
+                          //           date.toString().substring(0, 16))) {
+                          //         Get.defaultDialog(
+                          //             title: "کاتێک هەڵبژێرە",
+                          //             middleText:
+                          //                 "ئەم کاتە هەڵبژێی؟ ${date.toString().substring(0, 16)}",
+                          //             textConfirm: "بەڵێ",
+                          //             textCancel: "نەخێر",
+                          //             confirmTextColor: Colors.white,
+                          //             cancelTextColor: AppColors.darkPurple,
+                          //             buttonColor: AppColors.darkPurple,
+                          //             onConfirm: () async {
+                          //               await controller.setTheDateToDoctor(
+                          //                   date.toString().substring(0, 16));
+                          //               Get.back();
+                          //             },
+                          //             onCancel: () {
+                          //               Get.close;
+                          //             });
+                          //       } else {
+                          //         Get.defaultDialog(
+                          //             title: "کاتەکەت هەڵەیە ",
+                          //             middleText:
+                          //                 "کاتەکەت هەڵەیە تکایە کاتێکی تر هەڵبژێرە",
+                          //             textConfirm: "باش",
+                          //             confirmTextColor: Colors.white,
+                          //             cancelTextColor: AppColors.darkPurple,
+                          //             buttonColor: AppColors.darkPurple,
+                          //             onConfirm: () {
+                          //               Get.close;
+                          //             },
+                          //             onCancel: () {
+                          //               Get.close;
+                          //             });
+                          //       }
+                          //     }, currentTime: DateTime.now());
+                          //   },
+                          //   child: const Text("کاتێک هەڵبژێرە"),
+                          // ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(

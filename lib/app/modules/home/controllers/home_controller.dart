@@ -17,6 +17,7 @@ class HomeController extends GetxController {
   RxString userRole = ''.obs;
   RxBool isLoading = true.obs;
   RxList docList = [].obs;
+  RxList docList2 = [].obs;
 
   Future getSearchResults(String searchField) async {
     return await firestore
@@ -36,11 +37,9 @@ class HomeController extends GetxController {
   changeIndex(index) {
     switch (index) {
       case 0:
-        Get.to(Routes.HOME,
-            transition: Transition.rightToLeftWithFade,
-            duration: Duration(
-              milliseconds: 500,
-            ));
+        Get.toNamed(
+          Routes.HOME,
+        );
         break;
       case 1:
         Get.toNamed(
@@ -48,12 +47,21 @@ class HomeController extends GetxController {
         );
         break;
       case 2:
-        Get.toNamed(Routes.SIGN_UP);
+        Get.toNamed(Routes.FAVIORETS);
         break;
       case 3:
-        Get.toNamed(Routes.HOME);
+        Get.toNamed(Routes.USER_PROFILE);
         break;
     }
+  }
+
+  searchForUsers(text) async {
+    final usersCollection = FirebaseFirestore.instance.collection('Users');
+
+    final QuerySnapshot users =
+        await usersCollection.where('firstName', isEqualTo: text).get();
+
+    docList.value = users.docs;
   }
 
   checkUserIsLoggedIn() async {

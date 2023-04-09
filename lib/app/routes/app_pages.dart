@@ -4,12 +4,16 @@ import '../modules/chat_screen/bindings/chat_screen_binding.dart';
 import '../modules/chat_screen/views/chat_screen_view.dart';
 import '../modules/chats/bindings/chats_binding.dart';
 import '../modules/chats/views/chats_view.dart';
+import '../modules/faviorets/bindings/faviorets_binding.dart';
+import '../modules/faviorets/views/faviorets_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/payment/bindings/payment_binding.dart';
 import '../modules/payment/views/payment_view.dart';
+import '../modules/scheduale/bindings/scheduale_binding.dart';
+import '../modules/scheduale/views/scheduale_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/stars/bindings/stars_binding.dart';
@@ -26,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -78,6 +82,16 @@ class AppPages {
       name: _Paths.CHATS,
       page: () => const ChatsView(),
       binding: ChatsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDUALE,
+      page: () => const SchedualeView(),
+      binding: SchedualeBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVIORETS,
+      page: () => const FavioretsView(),
+      binding: FavioretsBinding(),
     ),
   ];
 }
