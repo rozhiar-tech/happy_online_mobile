@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
    <application
-        android:label="happy_online_mobile"
+        android:label="Happy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
