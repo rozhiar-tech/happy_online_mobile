@@ -4,6 +4,7 @@ class StarsController extends GetxController {
   //TODO: Implement StarsController
 
   RxString userId = ''.obs;
+  RxString price = '٣٠٠٠٠'.obs;
   final count = 0.obs;
 
   final Map<String, dynamic> args = Get.arguments;

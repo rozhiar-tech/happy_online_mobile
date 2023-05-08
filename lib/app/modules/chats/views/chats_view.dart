@@ -29,15 +29,6 @@ class ChatsView extends GetView<ChatsController> {
               centerTitle: true,
               backgroundColor: Colors.white,
               elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  Get.toNamed(Routes.HOME);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.darkPurple,
-                ),
-              ),
             ),
             bottomNavigationBar: AnimatedBottomNavigationBar(
               icons: [

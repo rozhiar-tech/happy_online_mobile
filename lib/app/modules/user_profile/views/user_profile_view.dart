@@ -46,18 +46,14 @@ class UserProfileView extends GetView<UserProfileController> {
                     height: Get.height * 0.3,
                     width: Get.width,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.darkPurple, AppColors.lightPink],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                      color: AppColors.darkPurple,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          backgroundImage: AssetImage('assets/splash.jpg'),
+                          backgroundImage: AssetImage('assets/aa.png'),
                         ),
                         SizedBox(height: 10),
                         Text(

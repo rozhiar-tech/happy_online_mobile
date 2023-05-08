@@ -28,13 +28,16 @@ class LoginView extends GetView<LoginController> {
                         width: Get.width,
                         child: Column(
                           children: [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                "assets/splash.jpg",
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundImage: AssetImage(
+                                  "assets/aa.png",
+                                ),
                               ),
                             ),
-                            Text("ژوورەوە"),
+                            Text("چوونەژوورەوە"),
                             SizedBox(
                               height: 20,
                             ),

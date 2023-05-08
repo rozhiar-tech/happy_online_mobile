@@ -11,7 +11,7 @@ class SignUpController extends GetxController {
   RxString passwordConfirm = "".obs;
   RxString name = "".obs;
   RxString phone = "".obs;
-  RxString signUpText = "دروستکردن".obs;
+  RxString signUpText = "تۆمار بوون".obs;
   RxString lastName = "".obs;
   RxString nationalCode = "".obs;
 

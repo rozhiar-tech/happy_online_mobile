@@ -14,7 +14,7 @@ class StarsView extends GetView<StarsController> {
           init: StarsController(),
           builder: (controller) {
             return Scaffold(
-              body: Container(
+              body: SizedBox(
                 height: Get.height,
                 width: Get.width,
                 child: Padding(
@@ -24,14 +24,14 @@ class StarsView extends GetView<StarsController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("کڕینی ستار"),
+                      const Text("کڕینی ستار"),
                       // ElevatedButton(
                       //   onPressed: () {
                       //     // Get.back();
                       //   },
                       //   child: Text("Back"),
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
 
@@ -48,7 +48,7 @@ class StarsView extends GetView<StarsController> {
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(
                                     Icons.star,
                                     color: Colors.white,
@@ -83,7 +83,7 @@ class StarsView extends GetView<StarsController> {
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(
                                     Icons.star,
                                     color: Colors.white,
@@ -106,7 +106,7 @@ class StarsView extends GetView<StarsController> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -119,12 +119,12 @@ class StarsView extends GetView<StarsController> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.star,
                                     color: Colors.white,
                                     size: 30,
                                   ),
-                                  Text(
+                                  const Text(
                                     "٣ ستار",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -132,8 +132,8 @@ class StarsView extends GetView<StarsController> {
                                     ),
                                   ),
                                   Text(
-                                    "٣٠،٠٠٠ دینار",
-                                    style: TextStyle(
+                                    controller.price.value,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
                                     ),
@@ -145,27 +145,23 @@ class StarsView extends GetView<StarsController> {
                         ),
                       ),
                       Column(
-                        children: [
+                        children: const [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: Text(
-                                  "بە داوای لێبوردنەوە لە ئێستا تەنها ڕێگە بۆ کڕینی ستار ناردنی پارەیە بۆ ئەکاونتی فاست پەی ئەم رەقەمە یاخود ناردنی بۆ ئەکاونتی ف ئای بی",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                  )),
-                            ),
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                                "بە داوای لێبوردنەوە لە ئێستا تەنها ڕێگە بۆ کڕینی ستار ناردنی پارەیە بۆ ئەکاونتی فاست پەی ئەم رەقەمە یاخود ناردنی بۆ ئەکاونتی ف ئای بی",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                )),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: Text("0771 020 7959",
-                                  style: TextStyle(
-                                    color: AppColors.darkPurple,
-                                    fontSize: 20,
-                                  )),
-                            ),
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("0771 020 7959",
+                                style: TextStyle(
+                                  color: AppColors.darkPurple,
+                                  fontSize: 20,
+                                )),
                           ),
                           Text(
                               "لەگەڵ ناردنی ئاگادارمان بکەرەوە ستارەکان ئەکەینە ئەکاونتەکەتەوە")

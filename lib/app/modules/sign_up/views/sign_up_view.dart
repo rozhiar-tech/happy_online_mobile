@@ -22,10 +22,13 @@ class SignUpView extends GetView<SignUpController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage(
-                          "assets/splash.jpg",
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage(
+                            "assets/aa.png",
+                          ),
                         ),
                       ),
                       Text("تۆماربوون"),
@@ -115,27 +118,28 @@ class SignUpView extends GetView<SignUpController> {
                           onChanged: (value) => controller.name.value = value,
                         ),
                       ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: AppColors.lightPink,
-                            onPrimary: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0),
-                            ),
-                          ),
-                          onPressed: () async {
-                            await controller.signUp(
-                              controller.email.value,
-                              controller.password.value,
-                              controller.name.value,
-                              controller.phone.value,
-                              controller.lastName.value,
-                              controller.nationalCode.value,
-                            );
-                          },
-                          child: Text(
-                            controller.signUpText.value,
-                          )),
+                      Container(
+                        height: 50,
+                        width: Get.width * 0.8,
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              await controller.signUp(
+                                controller.email.value,
+                                controller.password.value,
+                                controller.name.value,
+                                controller.phone.value,
+                                controller.lastName.value,
+                                controller.nationalCode.value,
+                              );
+                            },
+                            child: Text(controller.signUpText.value),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.lightPink,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
+                            )),
+                      ),
                     ],
                   ),
                 ),

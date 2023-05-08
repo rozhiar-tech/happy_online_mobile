@@ -31,8 +31,8 @@ class HomeView extends GetView<HomeController> {
                   activeIndex: 0,
                   gapLocation: GapLocation.none,
                   notchSmoothness: NotchSmoothness.softEdge,
-                  leftCornerRadius: 32,
-                  rightCornerRadius: 32,
+                  // leftCornerRadius: 32,
+                  // rightCornerRadius: 32,
                   onTap: (index) {
                     controller.changeIndex(index);
                   },
@@ -51,26 +51,26 @@ class HomeView extends GetView<HomeController> {
                     child: Column(
                       children: [
                         Container(
-                            height: Get.height * 0.2,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: Get.height * 0.2,
-                                  width: Get.width * 0.2,
-                                  color: Colors.white,
+                          height: Get.height * 0.2,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: Get.height * 0.2,
+                                width: Get.width * 0.2,
+                                color: Colors.white,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: AssetImage('assets/aa.png'),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(right: 10.0),
-                                  child: CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage:
-                                        AssetImage('assets/splash.jpg'),
-                                  ),
-                                )
-                              ],
-                            )),
+                              )
+                            ],
+                          ),
+                        ),
                         Container(
                           decoration: const BoxDecoration(
                             color: Colors.white,
@@ -155,7 +155,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         Container(
-                          height: Get.height * 0.54,
+                          height: Get.height * 0.5,
                           color: Colors.white,
                           child: ListView.builder(
                             itemCount: controller.docList.length,
@@ -168,6 +168,8 @@ class HomeView extends GetView<HomeController> {
                                       userName: controller.docList[index]
                                           ['firstName'],
                                       role: controller.docList[index]['role'],
+                                      image: controller.docList[index]
+                                          ['photoUrl'],
                                       onTap: () {
                                         controller
                                             .clickOnbookButtonForTherapist(
@@ -191,12 +193,14 @@ class docContainer extends StatelessWidget {
   final String userName;
   final String role;
   final VoidCallback onTap;
+  final String image;
   // final String image;
   const docContainer({
     super.key,
     required this.userName,
     required this.role,
     required this.onTap,
+    required this.image,
     // required this.image,
   });
 
@@ -220,11 +224,13 @@ class docContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: CircleAvatar(
                 radius: 40,
-                backgroundImage: AssetImage('assets/splash.jpg'),
+                backgroundImage: image != null && image.isNotEmpty
+                    ? NetworkImage(image) as ImageProvider
+                    : AssetImage('assets/aa.png'),
               ),
             ),
             SingleChildScrollView(
@@ -235,7 +241,7 @@ class docContainer extends StatelessWidget {
                     child: Text(
                       '$userName',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -245,25 +251,25 @@ class docContainer extends StatelessWidget {
                     child: Text(
                       '$role',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: RatingBarIndicator(
-                      rating: 3,
-                      itemBuilder: (context, index) => const Icon(
-                        Icons.star,
-                        color: AppColors.lightPink,
-                      ),
-                      itemCount: 5,
-                      itemSize: 20.0,
-                      direction: Axis.horizontal,
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 8.0),
+                  //   child: RatingBarIndicator(
+                  //     rating: 3,
+                  //     itemBuilder: (context, index) => const Icon(
+                  //       Icons.star,
+                  //       color: AppColors.lightPink,
+                  //     ),
+                  //     itemCount: 5,
+                  //     itemSize: 20.0,
+                  //     direction: Axis.horizontal,
+                  //   ),
+                  // ),
                   Row(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -275,8 +281,8 @@ class docContainer extends StatelessWidget {
                       GestureDetector(
                         onTap: onTap,
                         child: Container(
-                          height: Get.height * 0.05,
-                          width: Get.width * 0.1,
+                          height: Get.height * 0.04,
+                          width: Get.width * 0.09,
                           decoration: BoxDecoration(
                             color: AppColors.lightPink,
                             borderRadius: BorderRadius.circular(24),

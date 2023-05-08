@@ -55,6 +55,7 @@ class TherapistProfileController extends GetxController {
     userName.value = docList[0]['firstName'];
     userRole.value = docList[0]['role'];
     bio.value = docList[0]['bio'];
+    userImage.value = docList[0]['photoUrl'];
 
     List<dynamic> timestampList = docList[0]['available_date'];
     List<String> formattedDates = timestampList.map((timestamp) {
